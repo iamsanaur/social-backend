@@ -1,0 +1,929 @@
+type User {
+  username: String!
+  userid: String!
+  firstname: String!
+  lastname: String!
+  email_id: String
+  gender: String!
+  cumulative_vibescore: Float
+  intelligence_score: Float
+  appeal_score: Float
+  social_score: Float
+  human_score: Float
+  profile_pic: String!
+  bio: String
+  designation: String
+  worksat: String
+  password: String!
+  phone_number: String
+  born: DateTime
+  school: String
+  college: String
+  lives_in: String
+  gmail_id: String
+  fb_id: String
+  insta_id: String
+  linkedin_id: String
+  apple_id: String
+  vibers_count: Int
+  post_count: Int
+  total_vibe_count: Int
+  repo_score: Float
+  mode: String
+  address: String
+  inner_circle_count: Int
+  outer_circle_count: Int
+  universe_circle_count: Int
+  experience_company_name: String
+  experience_year: Float
+  experience_field: String
+  award_name: String
+  award_year: Int
+  awarded_by: String
+  interest: String
+  title: String
+  profile_type: String
+  skill: String
+  user_popular_vibe: String
+  sells: [sells]
+  vibes: [vibes]
+  comments: [comments]
+  reviews: [reviews]
+  posts: [posts]
+  shares: [shares]
+  connect_as: [connectAs]
+  join_as: [joinAs]
+  schedules: [schedules]
+  assign_role: [assignRole]
+  recommends: [recommends]
+  views: [views]
+  mentions: [mentions]
+  saves: [saves]
+  creates: [creates]
+  has: [has]
+}
+
+type Product {
+  product_name: String!
+  product_id: ID!
+  company_name: String!
+  model_number: String!
+  email_id: String
+  cumulative_vibescore: Float
+  vibe_score_1: Float
+  vibe_score_2: Float
+  vibe_score_3: Float
+  vibe_score_4: Float
+  display_pic: String
+  product_description: String!
+  brand_name: String
+  password: String!
+  product_support_number: String!
+  launched: DateTime
+  product_price: Float
+  product_highlights: String
+  product_highlights_details: String
+  product_category: String
+  product_subcategory: String
+  product_niche: String
+  product_link: String
+  product_image: String
+  product_specification: String
+  product_specification_details: String
+  timestamp: DateTime!
+  vibers_count: Int
+  post_count: Int
+  total_vibe_count: Int
+  vibes: [vibes]
+  connect_as: [connectAs]
+  reviews: [reviews]
+  views: [views]
+  saves: [saves]
+  sells: [sells]
+  comments: [comments]
+  shares: [shares]
+  has: [has]
+  mentions: [mentions]
+}
+
+type Brand {
+  brandname: String!
+  brandid: ID!
+  company_name: String!
+  company_category: String!
+  email_id: String
+  cummulative_vibescore: Float
+  vibe_score_1: Float
+  vibe_score_2: Float
+  vibe_score_3: Float
+  vibe_score_4: Float
+  logo_pic: String
+  bio: String
+  Location: Point
+  tagline: String
+  password: String
+  contact_number: String
+  created: DateTime!
+  address: String
+  inner_circle_count: Int
+  outer_circle_count: Int
+  universe_circle_count: Int
+  viber_count: Int
+  post_count: Int
+  total_vibe_count: Int
+  repo_score: Float
+  mentions: [Product] @relation(direction: IN, name: "MENTIONS")
+  sells: [sells]
+  comments: [comments]
+  shares: [shares]
+  posts: [posts]
+  has: [has]
+  assign_role: [assignRole]
+  vibes: [vibes]
+  connect_as: [connectAs]
+  reviews: [reviews]
+  views: [views]
+  join_as: [joinAs]
+}
+
+type Post {
+  post_id: ID!
+  post_category: String!
+  post_type: String!
+  post_vibe_score: Float
+  post_popular_vibe: String
+  post_owner_id: ID
+  post_owner_image: String
+  post_owner_repo: Float
+  post_owner_location: Point
+  post_owner_community: String
+  post_owner_community_id: ID
+  no_of_post_vibes: Int
+  no_of_comment: Int
+  no_of_post_views: Int
+  post_share_count: Int
+  note_text: String
+  note_id: ID
+  post_subcategory: String
+  post_niche: String
+  post_link: String
+  post_title: String
+  post_description: String
+  post_hashtags: String
+  article_length: Int
+  ama_subject: String
+  ama_description: String
+  poll_post_vote: Int
+  diary_post_title: String
+  diary_post_description: String
+  diary_wishlist_category: String
+  timestamp: DateTime!
+  media: String
+  mentions: [mentions]
+  saves: [saves]
+  comments: [comments]
+  shares: [shares]
+  schedules: [schedules]
+  posts: [posts]
+  vibes: [vibes]
+  views: [views]
+}
+
+type Community {
+  community_name: String!
+  community_id: ID!
+  email_id: String
+  vibescore: Float
+  vibe_score_1: Float
+  vibe_score_2: Float
+  vibe_score_3: Float
+  vibe_score_4: Float
+  display_pic: String
+  bio: String
+  purpose: String
+  contact_number: String
+  created: DateTime!
+  community_type: String
+  community_review: String
+  participant_count: Int
+  privacy_mode: String
+  community_member_id: ID
+  inner_circle_count: Int
+  outer_circle_count: Int
+  universe_circle_count: Int
+  viber_count: Int
+  post_count: Int
+  total_vibe_count: Int
+  repo_score: Float
+  group_of_group: Boolean
+  vibes: [vibes]
+  connect_as: [connectAs]
+  reviews: [reviews]
+  join_as: [joinAs]
+  views: [views]
+  mentions: [mentions]
+  comments: [comments]
+  shares: [shares]
+  creates: [creates]
+  posts: [posts]
+  has: [has]
+  assign_role: [assignRole]
+}
+
+type Notification {
+  notification_text: String
+  timestamp: DateTime
+  notification_type: String
+  notification_id: ID
+  has: [has]
+}
+
+type connectAs @relation(name: "CONNECT_AS") {
+  from: User
+  to: User
+  connection_name: String
+  connection_code: String
+  connection_id: ID
+  connection_category: String
+  connection_subcategory: String
+  needs_approval: Boolean
+  reverse_connection_name: String
+  is_bidirectional: Boolean
+  creation_date: DateTime
+  change_date: DateTime
+  circle_category: String
+}
+type connectAs @relation(name: "CONNECT_AS") {
+  from: User
+  to: Product
+  connection_name: String
+  connection_code: String
+  connection_id: ID
+  connection_category: String
+  connection_subcategory: String
+  needs_approval: Boolean
+  reverse_connection_name: String
+  is_bidirectional: Boolean
+  creation_date: DateTime
+  change_date: DateTime
+  circle_category: String
+}
+type connectAs @relation(name: "CONNECT_AS") {
+  from: User
+  to: Brand
+  connection_name: String
+  connection_code: String
+  connection_id: ID
+  connection_category: String
+  connection_subcategory: String
+  needs_approval: Boolean
+  reverse_connection_name: String
+  is_bidirectional: Boolean
+  creation_date: DateTime
+  change_date: DateTime
+  circle_category: String
+}
+type connectAs @relation(name: "CONNECT_AS") {
+  from: Product
+  to: Product
+  connection_name: String
+  connection_code: String
+  connection_id: ID
+  connection_category: String
+  connection_subcategory: String
+  needs_approval: Boolean
+  reverse_connection_name: String
+  is_bidirectional: Boolean
+  creation_date: DateTime
+  change_date: DateTime
+  circle_category: String
+}
+
+type connectAs @relation(name: "CONNECT_AS") {
+  from: Community
+  to: Community
+  connection_name: String
+  connection_code: String
+  connection_id: ID
+  connection_category: String
+  connection_subcategory: String
+  needs_approval: Boolean
+  reverse_connection_name: String
+  is_bidirectional: Boolean
+  creation_date: DateTime
+  change_date: DateTime
+  circle_category: String
+}
+type connectAs @relation(name: "CONNECT_AS") {
+  from: Brand
+  to: Product
+  connection_name: String
+  connection_code: String
+  connection_id: ID
+  connection_category: String
+  connection_subcategory: String
+  needs_approval: Boolean
+  reverse_connection_name: String
+  is_bidirectional: Boolean
+  creation_date: DateTime
+  change_date: DateTime
+  circle_category: String
+}
+
+type joinAs @relation(name: "JOIN_AS") {
+  from: User
+  to: Community
+  community_name: String
+  connection_id: ID
+  community_category: String
+  community_Subcategory: String
+  needs_approval: Boolean
+  community_role_id: ID
+  community_score: Float
+  reputation_in_community: Float
+  vibes_in_community: String
+  role_in_community: String
+  creation_date: DateTime
+  change_date: DateTime
+}
+type joinAs @relation(name: "JOIN_AS") {
+  from: Brands
+  to: Community
+  community_name: String
+  connection_id: ID
+  community_category: String
+  community_Subcategory: String
+  needs_approval: Boolean
+  community_role_id: ID
+  community_score: Float
+  reputation_in_community: Float
+  vibes_in_community: String
+  role_in_community: String
+  creation_date: DateTime
+  change_date: DateTime
+}
+
+type vibes @relation(name: "VIBES") {
+  from: User
+  to: Product
+  vibe_id: ID
+  vibe_text: String
+  vibe_name: String
+  vibe_score: Float
+  created_date: DateTime!
+  vibe_category: String
+  comment_id: ID
+}
+
+type vibes @relation(name: "VIBES") {
+  from: User
+  to: User
+  vibe_id: ID
+  vibe_text: String
+  vibe_name: String
+  vibe_score: Float
+  created_date: DateTime!
+  vibe_category: String
+  comment_id: ID
+}
+
+type vibes @relation(name: "VIBES") {
+  from: User
+  to: Community
+  vibe_id: ID
+  vibe_text: String
+  vibe_name: String
+  vibe_score: Float
+  created_date: DateTime!
+  vibe_category: String
+  comment_id: ID
+}
+
+type vibes @relation(name: "VIBES") {
+  from: User
+  to: Brand
+  vibe_id: ID
+  vibe_text: String
+  vibe_name: String
+  vibe_score: Float
+  created_date: DateTime!
+  vibe_category: String
+  comment_id: ID
+}
+
+type vibes @relation(name: "VIBES") {
+  from: User
+  to: Post
+  vibe_id: ID
+  vibe_text: String
+  vibe_name: String
+  vibe_score: Float
+  created_date: DateTime!
+  vibe_category: String
+  comment_id: ID
+}
+
+type vibes @relation(name: "VIBES") {
+  from: Community
+  to: Post
+  vibe_id: ID
+  vibe_text: String
+  vibe_name: String
+  vibe_score: Float
+  created_date: DateTime!
+  vibe_category: String
+  comment_id: ID
+}
+
+type vibes @relation(name: "VIBES") {
+  from: Community
+  to: Community
+  vibe_id: ID
+  vibe_text: String
+  vibe_name: String
+  vibe_score: Float
+  created_date: DateTime!
+  vibe_category: String
+  comment_id: ID
+}
+
+type vibes @relation(name: "VIBES") {
+  from: Brand
+  to: Products
+  vibe_id: ID
+  vibe_text: String
+  vibe_name: String
+  vibe_score: Float
+  created_date: DateTime!
+  vibe_category: String
+  comment_id: ID
+}
+
+type vibes @relation(name: "VIBES") {
+  from: Brand
+  to: Post
+  vibe_id: ID
+  vibe_text: String
+  vibe_name: String
+  vibe_score: Float
+  created_date: DateTime!
+  vibe_category: String
+  comment_id: ID
+}
+
+type vibes @relation(name: "VIBES") {
+  from: Brand
+  to: Community
+  vibe_id: ID
+  vibe_text: String
+  vibe_name: String
+  vibe_score: Float
+  created_date: DateTime!
+  vibe_category: String
+  comment_id: ID
+}
+
+type vibes @relation(name: "VIBES") {
+  from: Brand
+  to: Brand
+  vibe_id: ID
+  vibe_text: String
+  vibe_name: String
+  vibe_score: Float
+  created_date: DateTime!
+  vibe_category: String
+  comment_id: ID
+}
+
+type comments @relation(name: "COMMENTS") {
+  from: User
+  to: Products
+  commentId: String
+  text: String
+  timestamp: DateTime!
+  commented_on: ID
+  vibe_score: Float
+  is_sub_comment: Boolean
+  sub_comment_of_id: ID
+}
+
+type comments @relation(name: "COMMENTS") {
+  from: User
+  to: Post
+  commentId: String
+  text: String
+  timestamp: DateTime!
+  commented_on: ID
+  vibe_score: Float
+  is_sub_comment: Boolean
+  sub_comment_of_id: ID
+}
+
+type comments @relation(name: "COMMENTS") {
+  from: User
+  to: Brand
+  commentId: String
+  text: String
+  timestamp: DateTime!
+  commented_on: ID
+  vibe_score: Float
+  is_sub_comment: Boolean
+  sub_comment_of_id: ID
+}
+
+type comments @relation(name: "COMMENTS") {
+  from: Community
+  to: Post
+  commentId: String
+  text: String
+  timestamp: DateTime!
+  commented_on: ID
+  vibe_score: Float
+  is_sub_comment: Boolean
+  sub_comment_of_id: ID
+}
+
+type comments @relation(name: "COMMENTS") {
+  from: Brand
+  to: Product
+  commentId: String
+  text: String
+  timestamp: DateTime!
+  commented_on: ID
+  vibe_score: Float
+  is_sub_comment: Boolean
+  sub_comment_of_id: ID
+}
+type comments @relation(name: "COMMENTS") {
+  from: Brand
+  to: Post
+  commentId: String
+  text: String
+  timestamp: DateTime!
+  commented_on: ID
+  vibe_score: Float
+  is_sub_comment: Boolean
+  sub_comment_of_id: ID
+}
+type comments @relation(name: "COMMENTS") {
+  from: Brand
+  to: Brand
+  commentId: String
+  text: String
+  timestamp: DateTime!
+  commented_on: ID
+  vibe_score: Float
+  is_sub_comment: Boolean
+  sub_comment_of_id: ID
+}
+
+type shares @relation(name: "SHARES") {
+  from: User
+  to: Post
+  shared_to_id: ID
+  timestamp: DateTime!
+  share_caption: String
+}
+type shares @relation(name: "SHARES") {
+  from: User
+  to: Product
+  shared_to_id: ID
+  timestamp: DateTime!
+  share_caption: String
+}
+type shares @relation(name: "SHARES") {
+  from: User
+  to: Brand
+  shared_to_id: ID
+  timestamp: DateTime!
+  share_caption: String
+}
+type shares @relation(name: "SHARES") {
+  from: Community
+  to: Post
+  shared_to_id: ID
+  timestamp: DateTime!
+  share_caption: String
+}
+type shares @relation(name: "SHARES") {
+  from: Brand
+  to: Product
+  shared_to_id: ID
+  timestamp: DateTime!
+  share_caption: String
+}
+type shares @relation(name: "SHARES") {
+  from: Brand
+  to: Post
+  shared_to_id: ID
+  timestamp: DateTime!
+  share_caption: String
+}
+type reviews @relation(name: "REVIEWS") {
+  from: User
+  to: Product
+  reviewId: ID
+  text: String
+  timestamp: DateTime!
+  review_type: String
+  review_vibe_name: String
+  review_vibe_score: Float
+  attachment: String
+}
+type reviews @relation(name: "REVIEWS") {
+  from: User
+  to: User
+  reviewId: ID
+  text: String
+  timestamp: DateTime!
+  review_type: String
+  review_vibe_name: String
+  review_vibe_score: Float
+  attachment: String
+}
+type reviews @relation(name: "REVIEWS") {
+  from: User
+  to: Brand
+  reviewId: ID
+  text: String
+  timestamp: DateTime!
+  review_type: String
+  review_vibe_name: String
+  review_vibe_score: Float
+  attachment: String
+}
+type reviews @relation(name: "REVIEWS") {
+  from: Community
+  to: Community
+  reviewId: ID
+  text: String
+  timestamp: DateTime!
+  review_type: String
+  review_vibe_name: String
+  review_vibe_score: Float
+  attachment: String
+}
+type reviews @relation(name: "REVIEWS") {
+  from: Brand
+  to: Brand
+  reviewId: ID
+  text: String
+  timestamp: DateTime!
+  review_type: String
+  review_vibe_name: String
+  review_vibe_score: Float
+  attachment: String
+}
+type reviews @relation(name: "REVIEWS") {
+  from: Brand
+  to: Community
+  reviewId: ID
+  text: String
+  timestamp: DateTime!
+  review_type: String
+  review_vibe_name: String
+  review_vibe_score: Float
+  attachment: String
+}
+type reviews @relation(name: "REVIEWS") {
+  from: Brand
+  to: Product
+  reviewId: ID
+  text: String
+  timestamp: DateTime!
+  review_type: String
+  review_vibe_name: String
+  review_vibe_score: Float
+  attachment: String
+}
+type assignRole @relation(name: "ASSIGN_ROLES") {
+  from: Community
+  to: User
+  role_name: String
+  role_code: String
+  role_Id: ID
+  creation_date: DateTime!
+  change_date: DateTime
+}
+type assignRole @relation(name: "ASSIGN_ROLES") {
+  from: Community
+  to: Brand
+  role_name: String
+  role_code: String
+  role_Id: ID
+  creation_date: DateTime!
+  change_date: DateTime
+}
+type assignRole @relation(name: "ASSIGN_ROLES") {
+  from: Brand
+  to: User
+  role_name: String
+  role_code: String
+  role_Id: ID
+  creation_date: DateTime!
+  change_date: DateTime
+}
+
+type recommends @relation(name: "RECOMMENDS") {
+  from: User
+  to: User
+  recommendation_id: ID
+  text: String
+  recommend_type: String
+  timestamp: DateTime!
+}
+
+type saves @relation(name: "SAVES") {
+  from: User
+  to: Post
+  board_name: String
+  board_ID: ID
+}
+
+type sells @relation(name: "SELLS") {
+  from: User
+  to: Product
+  product_name: String
+  seller_description: String
+  pricing_type: String
+  seller_type: String
+  seller_Id: ID
+  seller_vibe_score: Float
+  seller_contact_info: String
+  seller_email_Id: String
+  sell_category: String
+  seller_since: DateTime
+  seller_response_time: String
+  timestamp: DateTime
+}
+
+type sells @relation(name: "SELLS") {
+  from: Brand
+  to: Product
+  product_name: String
+  seller_description: String
+  pricing_type: String
+  seller_type: String
+  seller_Id: ID
+  seller_vibe_score: Float
+  seller_contact_info: String
+  seller_email_Id: String
+  sell_category: String
+  seller_since: DateTime
+  seller_response_time: String
+  timestamp: DateTime
+}
+
+type posts @relation(name: "POSTS") {
+  from: User
+  to: Post
+  post_id: ID
+  timestamp: DateTime!
+  location: Point
+}
+type posts @relation(name: "POSTS") {
+  from: Community
+  to: Post
+  post_id: ID
+  timestamp: DateTime!
+  location: Point
+}
+type posts @relation(name: "POSTS") {
+  from: Brand
+  to: Post
+  post_id: ID
+  timestamp: DateTime!
+  location: Point
+}
+
+type schedules @relation(name: "SCHEDULES") {
+  from: User
+  to: Post
+  schedule_vibe: String
+  schedule_post_id: ID
+  schedule_to_id: ID
+  repeat: Boolean
+  repeat_frequency: String
+  start_date: DateTime
+  end_date: DateTime
+}
+
+type creates @relation(name: "CREATES") {
+  from: User
+  to: Community
+  timestamp: DateTime
+}
+type creates @relation(name: "CREATES") {
+  from: Brand
+  to: Community
+  timestamp: DateTime
+}
+
+type views @relation(name: "VIEWS") {
+  from: User
+  to: Community
+  view_time: Int
+  viewable_realstate: Float
+}
+
+type views @relation(name: "VIEWS") {
+  from: User
+  to: Post
+  view_time: Int
+  viewable_realstate: Float
+}
+
+type views @relation(name: "VIEWS") {
+  from: User
+  to: Product
+  view_time: Int
+  viewable_realstate: Float
+}
+
+type views @relation(name: "VIEWS") {
+  from: User
+  to: Brand
+  view_time: Int
+  viewable_realstate: Float
+}
+
+type views @relation(name: "VIEWS") {
+  from: Community
+  to: Community
+  view_time: Int
+  viewable_realstate: Float
+}
+type views @relation(name: "VIEWS") {
+  from: Community
+  to: Post
+  view_time: Int
+  viewable_realstate: Float
+}
+type views @relation(name: "VIEWS") {
+  from: Brand
+  to: Post
+  view_time: Int
+  viewable_realstate: Float
+}
+type views @relation(name: "VIEWS") {
+  from: Brand
+  to: Product
+  view_time: Int
+  viewable_realstate: Float
+}
+type views @relation(name: "VIEWS") {
+  from: Brand
+  to: Community
+  view_time: Int
+  viewable_realstate: Float
+}
+type views @relation(name: "VIEWS") {
+  from: Brand
+  to: Brand
+  view_time: Int
+  viewable_realstate: Float
+}
+type mentions @relation(name: "MENTIONS") {
+  from: Post
+  to: User
+}
+type mentions @relation(name: "MENTIONS") {
+  from: Post
+  to: Brand
+}
+type mentions @relation(name: "MENTIONS") {
+  from: User
+  to: Product
+}
+type mentions @relation(name: "MENTIONS") {
+  from: Community
+  to: Community
+}
+type mentions @relation(name: "MENTIONS") {
+  from: Brand
+  to: Product
+}
+type mentions @relation(name: "MENTIONS") {
+  from: Brand
+  to: Brand
+}
+type has @relation(name: "HAS") {
+  from: User
+  to: Notification
+  notification_id: ID
+}
+type has @relation(name: "HAS") {
+  from: Community
+  to: Notification
+  notification_id: ID
+}
+type has @relation(name: "HAS") {
+  from: Brand
+  to: Notification
+  notification_id: ID
+}
+type has @relation(name: "HAS") {
+  from: Product
+  to: Notification
+  notification_id: ID
+}

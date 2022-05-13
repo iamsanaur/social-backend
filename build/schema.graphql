@@ -1,0 +1,465 @@
+type User {
+  username: String!
+  userid: String!
+  firstname: String
+  lastname: String
+  email_id: String
+  vibescore: Float
+  intelligence_score: Float
+  appeal_score: Float
+  social_score: Float
+  human_score: Float
+  profile_pic: String
+  bio: String
+  designation: String
+  worksat: String
+  password: String
+  phone_number: Float
+  born: String
+  school: String
+  college: String
+  connection_id: ID
+  saved_board_id: ID
+  saved_board_names: ID
+  save_note_id: ID
+  note_text: String
+  schedule_postid: ID
+  scedule_text_to_id: ID
+  map_property: ID
+  map_reviews: Float
+  gmail: String
+  fb_id: String
+  insta_id: String
+  linkedin_id: String
+  geo_tag: String
+
+  has_product: [Products] @relation(direction: OUT, name: "HAS_PRODUCT")
+  vibes_product: [VibesAtProduct]
+  comments_product: [CommentsAtProduct]
+  reviews_product: [Products] @relation(direction: OUT, name: "REVIEWS_PRODUCT")
+  product_has: [Products] @relation(direction: IN, name: "HAS_USER")
+
+  has_posts: [Posts] @relation(direction: OUT, name: "HAS_POSTS")
+  vibes_posts: [VibesAtPosts]
+  comments_at_posts: [CommentsAtPosts]
+  post_shared: [SharedToUser]
+
+  review_brand: [Brand] @relation(direction: OUT, name: "REVIEWS")
+  user_brand: [ConnectedAsBrand]
+  brand_has: [Brand] @relation(direction: IN, name: "HAS")
+
+  community_member: [MemberOf]
+  reviews_community: [Community] @relation(direction: OUT, name: "REVIEWS")
+  community_has_user: [Community] @relation(direction: IN, name: "HAS")
+
+  has_dairy: [Dairy] @relation(direction: OUT, name: "HAS")
+  schedule_vibe: [Scheduled_Vibes] @relation(direction: IN, name: "SENT_TO")
+
+  user_connected_as: [ConnectedASUser]
+
+  review_user: [User] @relation(direction: IN, name: "REVIEWS")
+}
+
+type VibesAtProduct @relation(name: "VIBES_AT") {
+  from: User
+  to: Products
+  interaction_name: String
+  Code: String
+  InteractionId: ID
+  text: String
+  Vibe_name: String
+  Vibe_number: String
+  Timestamp: DateTime!
+}
+
+type CommentsAtProduct @relation(name: "COMMENTS_AT_PRODUCT") {
+  from: User
+  to: Products
+  commentId: String
+  text: String
+  timestamp: String
+  commented_on: ID
+  vibe_score: Float
+  debate_id: ID
+  topic: String
+  debator_id: ID
+  debatee_id: ID
+  judgeman_id: ID
+  debator_1: String
+  debator_2: String
+  debator1_score: Float
+  debator2_score: Float
+  debate_winner_id: ID
+}
+
+type VibesAtPosts @relation(name: "VIBES_AT") {
+  from: User
+  to: Posts
+  interaction_name: String
+  Code: String
+  InteractionId: ID
+  text: String
+  Vibe_name: String
+  Vibe_number: Float
+  Timestamp: DateTime!
+  map_property: ID
+}
+
+type CommentsAtPosts @relation(name: "COMMENTS_AT") {
+  from: User
+  to: Posts
+  commentId: ID!
+  text: String
+  timestamp: DateTime
+  commented_on: String
+  vibe_score: Float
+  debate_id: ID
+  topic: String
+  debator_id: ID
+  debatee_id: ID
+  judgeman_id: ID
+  debator_1: String
+  debator_2: String
+  debator_1_score: Float
+  debator_2_score: Float
+  debate_winner_id: ID
+}
+
+type SharedToUser @relation(name: "SHARED_TO") {
+  from: Posts
+  to: User
+  Shared_to_id: ID
+  Post_id: ID
+}
+
+type ConnectedASBrand @relation(name: "CONNECTED_AS") {
+  from: User
+  to: Brand
+  connection_name: String
+  connection_code: String
+  connection_id: ID
+  connection_category: String
+  connection_subcategory: String
+  needs_approval: String
+  reverse_connection_name: String
+  is_bidirectional: Boolean
+}
+
+type MemberOf @relation(name: "MEMBER_OF") {
+  from: User
+  to: Community
+  Community_name: String
+  Community_category: String
+  Community_id: ID
+  Connection_id: ID
+  Reputation_in_community: String
+  Vibes_in_community: String
+  Community_Score: Float
+  Community_role_id: ID
+}
+
+type ConnectedASUser @relation(name: "CONNECTED_AS") {
+  from: User
+  to: User
+  connection_name: String
+  connection_code: String
+  connection_id: ID
+  connection_category: String
+  connection_subcategory: String
+  needs_approval: String
+  reverse_connection_name: String
+  reverse_connection_id: ID
+  is_bidirectional: Boolean
+}
+
+type Products {
+  product_name: String!
+  product_id: ID!
+  company_name: String!
+  model_number: String!
+  email_id: String
+  vibescore: Float
+  Vibe_score_1: Float
+  Vibe_score_2: Float
+  Vibe_score_3: Float
+  Vibe_score_4: Float
+  display_pic: String
+  product_description: String
+  designation: String
+  brand_name: String
+  password: String
+  product_support_number: Float
+  launched: String
+  map_property: ID
+  map_reviews: String
+
+  has_user: [User] @relation(direction: OUT, name: "HAS")
+  user_has: [User] @relation(direction: IN, name: "HAS")
+  user_vibes: [VibesAtProduct]
+  user_comments: [CommentsAtProduct]
+  user_review: [User] @relation(direction: IN, name: "REVIEWS_PRODUCT")
+
+  wishlist: [Wishlist]
+
+  community_has: [Community] @relation(direction: IN, name: "HAS")
+  has_community: [Community] @relation(direction: OUT, name: "HAS")
+
+  brand_has: [Brand] @relation(direction: IN, name: "HAS")
+  prod_belongs_to: [Brand] @relation(direction: OUT, name: "BELONGS_TO")
+
+  posts_shared: [SharedToProduct]
+  has_post: [Posts] @relation(direction: OUT, name: "HAS")
+
+  product_connected_as: [ConnectedAsProd]
+}
+
+type Wishlist @relation(name: "WISHLIST") {
+  from: Dairy
+  to: Products
+  ProductId: ID
+  Boards: String
+}
+
+type SharedToProduct @relation(name: "SHARED_TO") {
+  from: Posts
+  to: Products
+  Shared_to_id: ID
+  Post_id: ID
+}
+
+type ConnectedAsProd @relation(name: "CONNECTED_AS") {
+  from: Products
+  to: Products
+  connection_name: String
+  connection_code: String
+  connection_id: ID
+  connection_category: String
+  connection_subcategory: String
+  needs_approval: String
+  reverse_connection_name: String
+  is_bidirectional: Boolean
+}
+
+type Brand {
+  brandname: String!
+  brandid: ID!
+  company_name: String!
+  company_category: String!
+  email_id: String
+  vibescore: Float
+  Vibe_score_1: Float
+  Vibe_score_2: Float
+  Vibe_score_3: Float
+  Vibe_score_4: Float
+  logo_pic: String
+  bio: String
+  geography: String
+  tagline: String
+  password: String
+  contact_number: Float
+  created: String
+  connection_id: ID
+  saved_board_id: ID
+  saved_board_names: String
+  save_note_id: ID
+  note_text: String
+  schedule_vibe: String
+  schedule_postid: ID
+  scedule_text_to_id: ID
+  map_property: ID
+  map_reviews: ID
+
+  user_connected_as: [ConnectedAsBrand]
+  has_user: [User] @relation(direction: OUT, name: "HAS")
+  user_review: [User] @relation(direction: IN, name: "REVIEWS")
+
+  has_post: [Posts] @relation(direction: OUT, name: "HAS")
+  has_community: [Community] @relation(direction: OUT, name: "HAS")
+
+  has_product: [Products] @relation(direction: OUT, name: "HAS")
+  prod_belongs_to: [Products] @relation(direction: OUT, name: "BELONGS_TO")
+
+  brand_connected_as: [ConnectedAsBrand]
+}
+
+type ConnectedAsBrand @relation(name: "CONNECTED_AS") {
+  from: Brand
+  to: Brand
+  connection_name: String
+  connection_code: String
+  connection_id: ID
+  connection_category: String
+  connection_subcategory: String
+  needs_approval: String
+  reverse_connection_name: String
+  reverse_connection_id: ID
+  is_bidirectional: Boolean
+}
+
+type Posts {
+  post_id: ID!
+  post_category: String
+  post_type: String!
+  post_vibe_score: Float
+  post_popular_vibes: ID
+  post_owner_id: ID
+  post_owner_image: String
+  post_owner_repo: String
+  post_owner_lat: Float
+  post_owner_lon: Float
+  post_owner_community: String
+  post_owner_community_id: ID
+  no_of_post_vibes: Int
+  no_of_comment: Int
+  comment_text: String
+  no_of_post_views: Int
+  post_share: String
+  post_share_to_id: ID
+  save_to_board_id: ID
+  product_post_id: ID
+  post_creator_id: ID
+  product_description: String
+  Product_requirement: String
+  product_skillset_requirement: String
+  product_call_to_action_id: ID
+  product_experience_requirement: String
+  product_quantity: Int
+  product_apply: String
+  product_sub_category: String
+
+  shared_to_product: [SharedToProduct]
+  product_post: [Products] @relation(direction: IN, name: "HAS")
+
+  shared_to_user: [SharedToUser]
+  user_post: [User] @relation(direction: IN, name: "HAS")
+  user_vibes: [VibesAtPosts]
+  user_comments: [CommentsAtPosts]
+
+  brand_post: [Brand] @relation(direction: IN, name: "HAS")
+
+  dairy_post: [SavedPosts]
+
+  community_post: [Community] @relation(direction: IN, name: "HAS")
+  community_vibes: [CommunityVibesAtPosts]
+  shared_to_community: [SharedToCommunity]
+
+  community_comments: [CommunityComments]
+}
+
+type SavedPosts @relation(name: "SAVED_POSTS") {
+  from: Dairy
+  to: Posts
+  Post_id: ID
+  Boards: String
+}
+
+type CommunityVibesAtPosts @relation(name: "VIBES_AT") {
+  from: Community
+  to: Posts
+  interaction_name: String
+  Code: String
+  InteractionId: ID
+  text: String
+  Vibe_name: String
+  Vibe_number: Float
+  Timestamp: DateTime!
+  map_property: ID
+}
+
+type SharedToCommunity @relation(name: "SHARED_TO") {
+  from: Posts
+  to: Community
+  Shared_to_id: ID
+  Post_id: ID
+}
+
+type CommunityComments @relation(name: "COMMENTS") {
+  from: Community
+  to: Posts
+  commentId: ID
+  text: String
+  timestamp: DateTime!
+  commented_on: ID
+  vibe_score: Float
+  debate_id: ID
+  topic: String
+  debator_id: ID
+  debatee_id: ID
+  judgeman_id: ID
+  debator1: String
+  debator2: String
+  debator1_score: Float
+  debator2_score: Float
+  debate_winner_id: ID
+}
+
+type Community {
+  Community_name: String!
+  community_id: ID!
+  email_id: String
+  mapofficialteam: ID
+  vibescore: Float
+  Vibe_score_1: Float
+  Vibe_score_2: Float
+  Vibe_score_3: Float
+  Vibe_score_4: Float
+  display_pic: String
+  bio: String
+  geography: String
+  Purpose: String
+  password: String
+  contact_number: Float
+  created: String
+  connection_id: ID
+  saved_board_id: ID
+  saved_board_names: String
+  save_note_id: ID
+  note_text: String
+  schedule_vibe: String
+  schedule_postid: ID
+  scedule_text_to_id: ID
+  map_property: ID
+  map_reviews: ID
+
+  user: [User] @relation(direction: OUT, name: "HAS")
+  user_member: [MemberOf]
+  user_review: [User] @relation(direction: IN, name: "REVIEWS")
+
+  products: [Products] @relation(direction: OUT, name: "HAS")
+  community_product: [Products] @relation(direction: IN, name: "HAS")
+
+  vibes_posts: [CommunityVibesAtPosts]
+  content: [Posts] @relation(direction: OUT, name: "HAS")
+  posts_shared: [Posts] @relation(direction: IN, name: "SHARED_TO")
+  community_comments: [CommunityComments]
+
+  brand_community: [Brand] @relation(direction: IN, name: "HAS")
+
+  schedule_vibe_to: [Scheduled_Vibes] @relation(direction: IN, name: "SENT_TO")
+  community_connected_as: [ConnectedASBrand]
+}
+
+type Dairy {
+  user_id: ID
+  user_dairy: [User] @relation(direction: IN, name: "HAS")
+  notes: [Notes] @relation(direction: OUT, name: "HAS")
+  saved_posts: [SavedPosts]
+  wishlist: [Wishlist]
+  scheduled_vibe: [Scheduled_Vibes] @relation(direction: OUT, name: "HAS")
+  community_dairy: [Community] @relation(direction: IN, name: "HAS")
+}
+
+type Notes {
+  Note_id: ID!
+  Note_description: String
+  Board: String
+  dairy: [Dairy] @relation(direction: IN, name: "HAS")
+}
+
+type Scheduled_Vibes {
+  Message_id: ID
+  ScheduledTo_id: ID
+  vibe_sent_to_community: [Community] @relation(direction: OUT, name: "SENT_TO")
+  dairy_has: [Dairy] @relation(direction: IN, name: "HAS")
+  vibe_sent_to_user: [User] @relation(direction: OUT, name: "SENT_TO")
+}
